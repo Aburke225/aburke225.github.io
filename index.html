@@ -203,12 +203,19 @@
     }
     .project.py h3 a { color: #eae6de; }
     .project.py h3 a:hover { color: #35c4a4; }
-    /* the site's lowercase mono wordmark, vertically centered in the tile */
-    .project.py { display: flex; align-items: center; }
+    /* the site's lowercase mono wordmark, centered and filling the tile */
+    .project.py {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1.5rem 1.2rem;
+    }
     .project.py h3 { margin: 0; }
     .project.py h3 a {
       font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
       font-weight: 500;
+      font-size: 1.25rem;
       letter-spacing: 0.02em;
     }
     /* the site's blinking input caret */
@@ -298,7 +305,7 @@
       <!-- Duplicate one of these <li> blocks for each new project site.
            Swap the "Coming soon" span for a live link in the <h3>. -->
       <li class="project py">
-        <h3><a href="https://aburke225.github.io/prompt-yourself/">prompt yourself<span class="py-caret"></span></a></h3>
+        <h3><a href="https://aburke225.github.io/prompt-yourself/">prompt yourself.<span class="py-caret"></span></a></h3>
       </li>
       <li class="project dv">
         <h3><a href="https://aburke225.github.io/deja-vu/">Déjà Vu Log</a></h3>
