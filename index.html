@@ -237,7 +237,12 @@
       border-color: #26242f;
       text-align: center;
       padding: 1.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
+    .project.dv h3 { margin: 0; }
     .project.dv h3 a { color: #eae7f2; }
     .project.dv h3 a:hover { color: #a99df2; }
     .project.dv h3 a {
@@ -246,12 +251,12 @@
       font-size: 1.4rem;
       text-shadow: 2px 2px 0 rgba(169, 157, 242, 0.32);
     }
+    /* small pulse tucked under the title so the pair reads as one lockup */
     .dv-pulse {
       display: block;
-      width: 72%;
-      max-width: 220px;
-      height: 24px;
-      margin: 0.8rem auto 0;
+      width: 112px;
+      height: 13px;
+      margin: 0.4rem auto 0;
     }
     .project .soon {
       display: inline-block;
