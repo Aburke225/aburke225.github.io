@@ -203,38 +203,48 @@
     }
     .project.py h3 a { color: #eae6de; }
     .project.py h3 a:hover { color: #35c4a4; }
-    .project.py p { color: #a69e90; }
-    /* the site's lowercase mono wordmark */
+    /* the site's lowercase mono wordmark, vertically centered in the tile */
+    .project.py { display: flex; align-items: center; }
+    .project.py h3 { margin: 0; }
     .project.py h3 a {
       font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
       font-weight: 500;
       letter-spacing: 0.02em;
     }
-    .project.py .soon {
-      font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-      color: #35c4a4;
-      border-color: #2a4038;
+    /* the site's blinking input caret */
+    .py-caret {
+      display: inline-block;
+      width: 2px;
+      height: 0.95em;
+      margin-left: 0.3em;
+      background: #35c4a4;
+      vertical-align: -0.12em;
+      animation: pyblink 1.1s steps(2, start) infinite;
     }
-    /* Second Exposure card wears that site's ink-violet colorway */
+    @keyframes pyblink { to { visibility: hidden; } }
+    @media (prefers-reduced-motion: reduce) { .py-caret { animation: none; } }
+    /* Déjà Vu Log card wears that site's ink-violet colorway,
+       centered, ghost-doubled title over its mini pulse */
     .project.dv {
       background: #0f0e14;
       border-color: #26242f;
+      text-align: center;
+      padding: 1.5rem 1.2rem;
     }
     .project.dv h3 a { color: #eae7f2; }
     .project.dv h3 a:hover { color: #a99df2; }
-    .project.dv p { color: #9a94ac; }
-    .project.dv h3 a { font-family: "Fraunces", Georgia, serif; }
-    /* the site's ghost-doubled display title */
     .project.dv h3 a {
+      font-family: "Fraunces", Georgia, serif;
       font-weight: 560;
-      font-size: 1.05rem;
+      font-size: 1.4rem;
       text-shadow: 2px 2px 0 rgba(169, 157, 242, 0.32);
     }
     .dv-pulse {
       display: block;
-      width: 96px;
-      height: 16px;
-      margin-top: 0.6rem;
+      width: 72%;
+      max-width: 220px;
+      height: 24px;
+      margin: 0.8rem auto 0;
     }
     .project .soon {
       display: inline-block;
