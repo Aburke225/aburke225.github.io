@@ -222,10 +222,12 @@
     .py-caret {
       display: inline-block;
       width: 4px;
-      height: 0.95em;
+      /* full-cap-line height, like the hero caret — it should stand
+         clearly taller than the lowercase wordmark beside it */
+      height: 1.05em;
       margin-left: 0.3em;
       background: #35c4a4;
-      vertical-align: -0.12em;
+      vertical-align: -0.14em;
       animation: pyblink 1.1s steps(2, start) infinite;
     }
     @keyframes pyblink { to { visibility: hidden; } }
