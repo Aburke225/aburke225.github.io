@@ -5,11 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Andrew Burke</title>
   <meta name="description" content="Andrew Burke — personal site. Resume, links, and projects.">
+  <!-- dark is the default; apply a stored light preference before first paint -->
+  <script>try{if(localStorage.getItem('theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Fraunces:opsz,wght@9..144,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    /* dark by default regardless of system; light is a stored opt-in
+       (data-theme="light" set by the head snippet / toggle) */
     :root {
+      --bg: #121318;
+      --text: #eceae6;
+      --muted: #9a9a94;
+      --card: #1c1e21;
+      --border: #2c2f33;
+      --accent: #4f83f1;
+      --accent-text: #ffffff;
+      --aurora-1: rgba(90, 140, 255, 0.25);
+      --aurora-2: rgba(150, 105, 255, 0.20);
+      --aurora-3: rgba(45, 212, 191, 0.14);
+      --grain: 0.06;
+      color-scheme: dark;
+    }
+    :root[data-theme="light"] {
       --bg: #f7f7fa;
       --text: #1a1a1a;
       --muted: #6b6b6b;
@@ -21,22 +39,7 @@
       --aurora-2: rgba(139, 92, 246, 0.15);
       --aurora-3: rgba(20, 184, 166, 0.14);
       --grain: 0.03;
-      color-scheme: light dark;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #121318;
-        --text: #eceae6;
-        --muted: #9a9a94;
-        --card: #1c1e21;
-        --border: #2c2f33;
-        --accent: #4f83f1;
-        --accent-text: #ffffff;
-        --aurora-1: rgba(90, 140, 255, 0.25);
-        --aurora-2: rgba(150, 105, 255, 0.20);
-        --aurora-3: rgba(45, 212, 191, 0.14);
-        --grain: 0.06;
-      }
+      color-scheme: light;
     }
     * { box-sizing: border-box; }
     /* the ground lives on html: body is transparent so the fixed
@@ -123,11 +126,11 @@
     }
     .links a:hover {
       transform: translateY(-1px);
-      filter: brightness(1.08);
+      filter: brightness(1.15);
     }
     .links a.primary {
-      background: #7c3aed;
-      border-color: #7c3aed;
+      background: #8b5cf6;
+      border-color: #8b5cf6;
       color: #fff;
     }
     .links a.linkedin {
@@ -135,9 +138,10 @@
       border-color: #0a66c2;
       color: #fff;
     }
+    /* pure GitHub black disappears on the dark background */
     .links a.github {
-      background: #24292f;
-      border-color: #24292f;
+      background: #30363d;
+      border-color: #444c56;
       color: #fff;
     }
     .links a.youtube {
@@ -145,11 +149,16 @@
       border-color: #f00;
       color: #fff;
     }
-    /* small email tile pinned to the page's top-right corner */
-    .email-corner {
+    /* small email tile + theme toggle pinned to the page's top-right corner */
+    .corner {
       position: absolute;
       top: 1rem;
       right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+    .email-corner {
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
@@ -165,18 +174,30 @@
     }
     .email-corner:hover { transform: translateY(-1px); border-color: #0d9488; }
     .email-corner svg { width: 13px; height: 13px; fill: currentColor; }
-    @media (prefers-color-scheme: dark) {
-      .links a.primary {
-        background: #8b5cf6;
-        border-color: #8b5cf6;
-      }
-      /* pure GitHub black disappears on the dark background */
-      .links a.github {
-        background: #30363d;
-        border-color: #444c56;
-      }
-      .links a:hover { filter: brightness(1.15); }
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.35rem 0.55rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      font: inherit;
+      transition: border-color 0.15s ease, transform 0.15s ease;
     }
+    .theme-toggle:hover { transform: translateY(-1px); border-color: var(--accent); }
+    .theme-toggle svg { width: 14px; height: 14px; }
+    [data-theme="light"] .links a.primary {
+      background: #7c3aed;
+      border-color: #7c3aed;
+    }
+    [data-theme="light"] .links a.github {
+      background: #24292f;
+      border-color: #24292f;
+    }
+    [data-theme="light"] .links a:hover { filter: brightness(1.08); }
     .links a svg {
       width: 16px;
       height: 16px;
@@ -313,10 +334,13 @@
   </style>
 </head>
 <body>
-  <a class="email-corner" href="mailto:aburke225@berkeley.edu">
-    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/></svg>
-    Email
-  </a>
+  <div class="corner">
+    <a class="email-corner" href="mailto:aburke225@berkeley.edu">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/></svg>
+      Email
+    </a>
+    <button class="theme-toggle" type="button" aria-label="Switch to light mode"></button>
+  </div>
   <main>
     <img class="avatar" src="headshot.png" alt="Andrew Burke">
     <h1>Andrew Burke</h1>
@@ -358,5 +382,33 @@
       &copy; 2026 Andrew Burke &middot; <a href="https://github.com/Aburke225/aburke225.github.io">Source on GitHub</a>
     </footer>
   </main>
+  <script>
+    // manual light/dark toggle, same behavior as prompt-yourself:
+    // dark by default, a click stores the override in localStorage.
+    // Sun icon while dark (click for light), moon while light.
+    (function () {
+      var root = document.documentElement;
+      var btn = document.querySelector('.theme-toggle');
+      var SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+      var MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      function current() {
+        return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      }
+      function render() {
+        var dark = current() === 'dark';
+        btn.innerHTML = dark ? SUN : MOON;
+        btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+        btn.title = dark ? 'Light mode' : 'Dark mode';
+      }
+      btn.addEventListener('click', function () {
+        var next = current() === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        if (next === 'light') root.setAttribute('data-theme', 'light');
+        else root.removeAttribute('data-theme');
+        render();
+      });
+      render();
+    })();
+  </script>
 </body>
 </html>
