@@ -164,15 +164,15 @@
       gap: 0.35rem;
       padding: 0.35rem 0.7rem;
       border-radius: 8px;
-      border: 1px solid #1f3a29;
-      background: #0f1d14;
-      color: #6ee7a8;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
       text-decoration: none;
       font-size: 0.8rem;
       font-weight: 500;
       transition: border-color 0.15s ease, transform 0.15s ease;
     }
-    .email-corner:hover { transform: translateY(-1px); border-color: #34d399; }
+    .email-corner:hover { transform: translateY(-1px); border-color: #0d9488; }
     .email-corner svg { width: 13px; height: 13px; fill: currentColor; }
     .theme-toggle {
       display: inline-flex;
@@ -231,7 +231,19 @@
     }
     .project.py:hover { border-color: #35c4a4; }
     .project.dv:hover { border-color: #8b7de8; }
-    .project.sf:hover { border-color: #3b82f6; }
+    /* Stay-Fresh hover: the card lifts and the freshness dots bounce in sequence */
+    .project.sf:hover { transform: translateY(-2px); }
+    .project.sf:hover .sf-dots circle { animation: sfbob 0.9s ease-in-out infinite; }
+    .project.sf:hover .sf-dots circle:nth-of-type(2) { animation-delay: 0.12s; }
+    .project.sf:hover .sf-dots circle:nth-of-type(3) { animation-delay: 0.24s; }
+    @keyframes sfbob {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-3px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .project.sf:hover { transform: none; }
+      .project.sf:hover .sf-dots circle { animation: none; }
+    }
     .project h3 {
       margin: 0 0 0.3rem;
       font-size: 1rem;
@@ -311,12 +323,38 @@
       max-width: 220px;
       height: 24px;
       margin: 0.15rem auto 0;
+      overflow: visible;
+    }
+    /* Déjà Vu hover: a pulse travels across the seismogram, left to right */
+    .project.dv:hover .dv-pulse line {
+      animation: dvpulse 1.2s ease-in-out infinite;
+      transform-box: fill-box;
+      transform-origin: center bottom;
+    }
+    .project.dv:hover .dv-pulse line:nth-of-type(2)  { animation-delay: 0.06s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(3)  { animation-delay: 0.12s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(4)  { animation-delay: 0.18s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(5)  { animation-delay: 0.24s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(6)  { animation-delay: 0.30s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(7)  { animation-delay: 0.36s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(8)  { animation-delay: 0.42s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(9)  { animation-delay: 0.48s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(10) { animation-delay: 0.54s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(11) { animation-delay: 0.60s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(12) { animation-delay: 0.66s; }
+    @keyframes dvpulse {
+      0%, 40%, 100% { transform: scaleY(1); }
+      20% { transform: scaleY(1.5); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .project.dv:hover .dv-pulse line { animation: none; }
     }
     /* Stay-Fresh card: fridge-blue tile, rounded iOS-ish type,
        three dots fading from fresh toward expiring */
     .project.sf {
       background: #d9ecf7;
-      border-color: #b3d4e8;
+      border-color: #3b82f6;
+      transition: transform 0.15s ease;
       text-align: center;
       padding: 1.5rem 1.2rem;
       display: flex;
@@ -332,7 +370,7 @@
       color: #16405c;
     }
     .project.sf h3 a:hover { color: #2563eb; }
-    .sf-dots { display: block; width: 64px; height: 10px; margin: 0.5rem auto 0; }
+    .sf-dots { display: block; width: 64px; height: 10px; margin: 0.5rem auto 0; overflow: visible; }
     .project .soon {
       display: inline-block;
       margin-top: 0.6rem;
