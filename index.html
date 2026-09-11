@@ -281,6 +281,30 @@
       font-size: 1.25rem;
       letter-spacing: 0.02em;
     }
+    /* typewriter: on hover the wordmark types itself out, caret riding the
+       edge. The anchor keeps its full width so the centered lockup never
+       shifts; only the word's visible portion grows. 16ch = "prompt yourself." */
+    .project.py h3 a {
+      display: inline-block;
+      width: calc(16ch + 0.3em + 4px);
+      text-align: left;
+      white-space: nowrap;
+    }
+    .py-word {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      vertical-align: bottom;
+      max-width: 16ch;
+    }
+    .project.py:hover .py-word { animation: pytype 1.1s steps(16, end); }
+    @keyframes pytype {
+      from { max-width: 0; }
+      to { max-width: 16ch; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .project.py:hover .py-word { animation: none; }
+    }
     /* the site's blinking input caret */
     .py-caret {
       display: inline-block;
@@ -430,7 +454,7 @@
       <!-- Duplicate one of these <li> blocks for each new project site.
            Swap the "Coming soon" span for a live link in the <h3>. -->
       <li class="project py">
-        <h3><a href="https://aburke225.github.io/prompt-yourself/">prompt yourself.<span class="py-caret"></span></a></h3>
+        <h3><a href="https://aburke225.github.io/prompt-yourself/"><span class="py-word">prompt yourself.</span><span class="py-caret"></span></a></h3>
       </li>
       <li class="project dv">
         <h3><a href="https://aburke225.github.io/deja-vu/">Déjà Vu Log</a></h3>
