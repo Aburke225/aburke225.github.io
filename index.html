@@ -231,14 +231,16 @@
     }
     .project.py:hover { border-color: #35c4a4; }
     .project.dv:hover { border-color: #8b7de8; }
-    /* Stay-Fresh hover: the card lifts and the freshness dots bounce in sequence */
-    .project.sf:hover { transform: translateY(-2px); }
-    .project.sf:hover .sf-dots circle { animation: sfbob 0.9s ease-in-out infinite; }
-    .project.sf:hover .sf-dots circle:nth-of-type(2) { animation-delay: 0.12s; }
-    .project.sf:hover .sf-dots circle:nth-of-type(3) { animation-delay: 0.24s; }
-    @keyframes sfbob {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-3px); }
+    /* Stay-Fresh hover: the card lifts, the border goes blue, and the
+       freshness colors cycle through the dots — food staying fresh */
+    .project.sf:hover { transform: translateY(-2px); border-color: #3b82f6; }
+    .project.sf:hover .sf-dots circle { animation: sfcycle 1.8s linear infinite; }
+    .project.sf:hover .sf-dots circle:nth-of-type(2) { animation-delay: -0.6s; }
+    .project.sf:hover .sf-dots circle:nth-of-type(3) { animation-delay: -1.2s; }
+    @keyframes sfcycle {
+      0%, 100% { fill: #34d399; }
+      33% { fill: #a3e635; }
+      66% { fill: #fbbf24; }
     }
     @media (prefers-reduced-motion: reduce) {
       .project.sf:hover { transform: none; }
@@ -377,8 +379,8 @@
        three dots fading from fresh toward expiring */
     .project.sf {
       background: #d9ecf7;
-      border-color: #3b82f6;
-      transition: transform 0.15s ease;
+      border-color: #b3d4e8;
+      transition: transform 0.15s ease, border-color 0.15s ease;
       text-align: center;
       padding: 1.5rem 1.2rem;
       display: flex;
@@ -391,9 +393,8 @@
       font-family: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 600;
       font-size: 1.3rem;
-      color: #16405c;
+      color: #2563eb;
     }
-    .project.sf h3 a:hover { color: #2563eb; }
     .sf-dots { display: block; width: 64px; height: 10px; margin: 0.5rem auto 0; overflow: visible; }
     .project .soon {
       display: inline-block;
