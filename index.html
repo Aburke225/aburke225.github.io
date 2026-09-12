@@ -230,22 +230,30 @@
       position: absolute;
       inset: 0;
     }
-    .project.py:hover { border-color: #35c4a4; }
-    .project.dv:hover { border-color: #8b7de8; }
+    .project.py:hover,
+    .project.py.in-view { border-color: #35c4a4; }
+    .project.dv:hover,
+    .project.dv.in-view { border-color: #8b7de8; }
     /* Stay-Fresh hover: the card lifts, the border goes blue, and the
        freshness colors cycle through the dots — food staying fresh */
-    .project.sf:hover { transform: translateY(-2px); border-color: #3b82f6; }
-    .project.sf:hover .sf-dots circle { animation: sfcycle 1.8s linear infinite; }
-    .project.sf:hover .sf-dots circle:nth-of-type(2) { animation-delay: -0.6s; }
-    .project.sf:hover .sf-dots circle:nth-of-type(3) { animation-delay: -1.2s; }
+    .project.sf:hover,
+    .project.sf.in-view { transform: translateY(-2px); border-color: #3b82f6; }
+    .project.sf:hover .sf-dots circle,
+    .project.sf.in-view .sf-dots circle { animation: sfcycle 1.8s linear infinite; }
+    .project.sf:hover .sf-dots circle:nth-of-type(2),
+    .project.sf.in-view .sf-dots circle:nth-of-type(2) { animation-delay: -0.6s; }
+    .project.sf:hover .sf-dots circle:nth-of-type(3),
+    .project.sf.in-view .sf-dots circle:nth-of-type(3) { animation-delay: -1.2s; }
     @keyframes sfcycle {
       0%, 100% { fill: #34d399; }
       33% { fill: #a3e635; }
       66% { fill: #fbbf24; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .project.sf:hover { transform: none; }
-      .project.sf:hover .sf-dots circle { animation: none; }
+      .project.sf:hover,
+      .project.sf.in-view { transform: none; }
+      .project.sf:hover .sf-dots circle,
+      .project.sf.in-view .sf-dots circle { animation: none; }
     }
     .project h3 {
       margin: 0 0 0.3rem;
@@ -300,13 +308,15 @@
       vertical-align: bottom;
       max-width: 16ch;
     }
-    .project.py:hover .py-word { animation: pytype 1.1s steps(16, end); }
+    .project.py:hover .py-word,
+    .project.py.in-view .py-word { animation: pytype 1.1s steps(16, end); }
     @keyframes pytype {
       from { max-width: 0; }
       to { max-width: 16ch; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .project.py:hover .py-word { animation: none; }
+      .project.py:hover .py-word,
+      .project.py.in-view .py-word { animation: none; }
     }
     /* the site's blinking input caret */
     .py-caret {
@@ -352,7 +362,8 @@
        from the top, black up from the bottom. Squares are 36px (half the 72px
        pattern tile), corners at 50% ± n*36px; the action is centered, knights
        framing the wordmark's corners, pawns meeting beneath it. */
-    .project.bb:hover { border-color: #7cb56e; }
+    .project.bb:hover,
+    .project.bb.in-view { border-color: #7cb56e; }
     .bb-piece {
       position: absolute;
       width: 36px;
@@ -367,12 +378,18 @@
     .bb-bnb { left: calc(50% - 108px); top: calc(50% + 108px); } /* b8 */
     .bb-wnb { left: calc(50% - 108px); top: calc(50% - 144px); } /* b1 */
     .bb-bng { left: calc(50% + 72px);  top: calc(50% + 108px); } /* g8 */
-    .project.bb:hover .bb-wep { animation: bbwep 5.6s ease-in-out infinite; }
-    .project.bb:hover .bb-bep { animation: bbbep 5.6s ease-in-out infinite; }
-    .project.bb:hover .bb-wng { animation: bbwng 5.6s ease-in-out infinite; }
-    .project.bb:hover .bb-bnb { animation: bbbnb 5.6s ease-in-out infinite; }
-    .project.bb:hover .bb-wnb { animation: bbwnb 5.6s ease-in-out infinite; }
-    .project.bb:hover .bb-bng { animation: bbbng 5.6s ease-in-out infinite; }
+    .project.bb:hover .bb-wep,
+    .project.bb.in-view .bb-wep { animation: bbwep 5.6s ease-in-out infinite; }
+    .project.bb:hover .bb-bep,
+    .project.bb.in-view .bb-bep { animation: bbbep 5.6s ease-in-out infinite; }
+    .project.bb:hover .bb-wng,
+    .project.bb.in-view .bb-wng { animation: bbwng 5.6s ease-in-out infinite; }
+    .project.bb:hover .bb-bnb,
+    .project.bb.in-view .bb-bnb { animation: bbbnb 5.6s ease-in-out infinite; }
+    .project.bb:hover .bb-wnb,
+    .project.bb.in-view .bb-wnb { animation: bbwnb 5.6s ease-in-out infinite; }
+    .project.bb:hover .bb-bng,
+    .project.bb.in-view .bb-bng { animation: bbbng 5.6s ease-in-out infinite; }
     /* 1. e4 */
     @keyframes bbwep {
       0% { transform: translate(0, 0); opacity: 0; }
@@ -426,7 +443,8 @@
       100% { transform: translate(-36px, -72px); opacity: 0; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .project.bb:hover .bb-piece { animation: none; opacity: 0; }
+      .project.bb:hover .bb-piece,
+      .project.bb.in-view .bb-piece { animation: none; opacity: 0; }
     }
     /* Déjà Vu Log card wears that site's ink-violet colorway,
        centered, ghost-doubled title over its mini pulse */
@@ -459,28 +477,41 @@
       overflow: visible;
     }
     /* Déjà Vu hover: a pulse travels across the seismogram, left to right */
-    .project.dv:hover .dv-pulse line {
+    .project.dv:hover .dv-pulse line,
+    .project.dv.in-view .dv-pulse line {
       animation: dvpulse 1.2s ease-in-out infinite;
       transform-box: fill-box;
       transform-origin: center bottom;
     }
-    .project.dv:hover .dv-pulse line:nth-of-type(2)  { animation-delay: 0.06s; }
-    .project.dv:hover .dv-pulse line:nth-of-type(3)  { animation-delay: 0.12s; }
-    .project.dv:hover .dv-pulse line:nth-of-type(4)  { animation-delay: 0.18s; }
-    .project.dv:hover .dv-pulse line:nth-of-type(5)  { animation-delay: 0.24s; }
-    .project.dv:hover .dv-pulse line:nth-of-type(6)  { animation-delay: 0.30s; }
-    .project.dv:hover .dv-pulse line:nth-of-type(7)  { animation-delay: 0.36s; }
-    .project.dv:hover .dv-pulse line:nth-of-type(8)  { animation-delay: 0.42s; }
-    .project.dv:hover .dv-pulse line:nth-of-type(9)  { animation-delay: 0.48s; }
-    .project.dv:hover .dv-pulse line:nth-of-type(10) { animation-delay: 0.54s; }
-    .project.dv:hover .dv-pulse line:nth-of-type(11) { animation-delay: 0.60s; }
-    .project.dv:hover .dv-pulse line:nth-of-type(12) { animation-delay: 0.66s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(2),
+    .project.dv.in-view .dv-pulse line:nth-of-type(2) { animation-delay: 0.06s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(3),
+    .project.dv.in-view .dv-pulse line:nth-of-type(3) { animation-delay: 0.12s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(4),
+    .project.dv.in-view .dv-pulse line:nth-of-type(4) { animation-delay: 0.18s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(5),
+    .project.dv.in-view .dv-pulse line:nth-of-type(5) { animation-delay: 0.24s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(6),
+    .project.dv.in-view .dv-pulse line:nth-of-type(6) { animation-delay: 0.30s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(7),
+    .project.dv.in-view .dv-pulse line:nth-of-type(7) { animation-delay: 0.36s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(8),
+    .project.dv.in-view .dv-pulse line:nth-of-type(8) { animation-delay: 0.42s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(9),
+    .project.dv.in-view .dv-pulse line:nth-of-type(9) { animation-delay: 0.48s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(10),
+    .project.dv.in-view .dv-pulse line:nth-of-type(10) { animation-delay: 0.54s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(11),
+    .project.dv.in-view .dv-pulse line:nth-of-type(11) { animation-delay: 0.60s; }
+    .project.dv:hover .dv-pulse line:nth-of-type(12),
+    .project.dv.in-view .dv-pulse line:nth-of-type(12) { animation-delay: 0.66s; }
     @keyframes dvpulse {
       0%, 40%, 100% { transform: scaleY(1); }
       20% { transform: scaleY(1.5); }
     }
     @media (prefers-reduced-motion: reduce) {
-      .project.dv:hover .dv-pulse line { animation: none; }
+      .project.dv:hover .dv-pulse line,
+      .project.dv.in-view .dv-pulse line { animation: none; }
     }
     /* Stay-Fresh card: fridge-blue tile, rounded iOS-ish type,
        three dots fading from fresh toward expiring */
@@ -499,7 +530,7 @@
     .project.sf h3 a {
       font-family: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, sans-serif;
       font-weight: 600;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       color: #2563eb;
     }
     .sf-dots { display: block; width: 84px; height: 13px; margin: 0.5rem auto 0; overflow: visible; }
@@ -587,6 +618,22 @@
       &copy; 2026 Andrew Burke &middot; <a href="https://github.com/Aburke225/aburke225.github.io">Source on GitHub</a>
     </footer>
   </main>
+  <script>
+    // no hover on touch screens — play each card's animation while it is
+    // scrolled into view instead (and stop it when it scrolls out)
+    (function () {
+      try {
+        if (window.matchMedia('(hover: hover)').matches) return;
+        if (!('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            e.target.classList.toggle('in-view', e.isIntersecting);
+          });
+        }, { threshold: 0.6 });
+        document.querySelectorAll('.project').forEach(function (el) { io.observe(el); });
+      } catch (e) {}
+    })();
+  </script>
   <script>
     // manual light/dark toggle, same behavior as prompt-yourself:
     // dark by default, a click stores the override in localStorage.
