@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Andrew Burke | Resume</title>
+<style>
+  @page { size: letter; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #fff; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+    font-size: 9.6pt;
+    line-height: 1.3;
+    width: 8.5in;
+    padding: 0.33in 0.6in;
+  }
+  a { color: #1155cc; text-decoration: none; }
+
+  h1 {
+    text-align: center;
+    font-size: 19pt;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin-bottom: 2pt;
+  }
+  .contact {
+    text-align: center;
+    font-size: 9.2pt;
+    color: #444;
+    margin-bottom: 8pt;
+  }
+  .sep { color: #888; padding: 0 0.4em; font-weight: 700; }
+
+  h2 {
+    font-size: 10pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1.5pt;
+    margin: 7pt 0 3.5pt;
+    break-after: avoid;
+  }
+
+  .job { margin-bottom: 4pt; }
+  .company-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-weight: 700;
+    font-size: 10.5pt;
+  }
+  .role-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-weight: 600;
+    margin-top: 2pt;
+  }
+  .role-line .dates, .company-line .dates {
+    font-weight: 400;
+    color: #555;
+    font-size: 9.5pt;
+  }
+  ul { margin: 1.5pt 0 0 14pt; }
+  li { margin-bottom: 1pt; }
+
+  .project { margin-bottom: 2.5pt; }
+  .project .name { font-weight: 600; }
+  .project .url { color: #555; }
+  .project .url a { color: #1155cc; font-style: italic; }
+
+  .skills-row { margin-bottom: 2pt; }
+  .skills-row .label { font-weight: 600; }
+
+  .volunteer p { margin-bottom: 2pt; }
+</style>
+</head>
+<body>
+
+  <h1>Andrew Burke</h1>
+  <p class="contact">
+    San Francisco, CA<span class="sep">|</span>+1 (516) 996-9985<span class="sep">|</span><a href="mailto:andrewburke225@gmail.com">andrewburke225@gmail.com</a><span class="sep">|</span><a href="https://aburke225.github.io">aburke225.github.io</a>
+  </p>
+
+  <h2>Experience</h2>
+
+  <div class="job">
+    <div class="company-line"><span><a href="https://www.codepath.org">CodePath</a></span><span class="dates">2023–Present</span></div>
+    <div class="role-line"><span>Senior Curriculum Integration Specialist</span><span class="dates">2025–Present</span></div>
+    <ul>
+      <li>Took a new GenAI learning module from concept through launch (product requirements, stakeholder alignment, curriculum design); delivered to 20,000+ students.</li>
+      <li>Ship curriculum and platform improvements across a 17-course catalog: course realignments, AI grading, assessment fixes, and infrastructure migrations.</li>
+      <li>Automate and streamline content delivery in the student-facing LMS portal with ERB templating, API dynamic tags, and YAML configuration; lead semesterly course launches.</li>
+    </ul>
+    <div class="role-line"><span>Curriculum Developer</span><span class="dates">2024–2025</span></div>
+    <ul>
+      <li>Designed new labs, projects, and assessments across course pathways and enhanced existing content; maintained the LMS portal.</li>
+      <li>Managed project teams of subject-matter experts, content developers, and designers through active development cycles.</li>
+    </ul>
+    <div class="role-line"><span>Curriculum Writer</span><span class="dates">2023–2024</span></div>
+    <ul>
+      <li>Wrote and maintained project-based, industry-relevant curriculum for six courses: Web, iOS, Android, Cybersecurity, Technical Interview Prep, and Summer Internship for Tech Excellence (SITE).</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="company-line"><span><a href="https://www.create-learn.us">Create &amp; Learn</a><span class="sep">|</span>Teacher</span><span class="dates">2022–2023</span></div>
+    <ul>
+      <li>Tailored computer science lessons to K-12 students, from beginner programming through Python and AI.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="company-line"><span><a href="https://eecs.berkeley.edu">UC Berkeley EECS</a><span class="sep">|</span>Undergraduate Student Instructor</span><span class="dates">2019–2021</span></div>
+    <ul>
+      <li>Served as Lead Discussion TA for CS10, an introductory computer science course taught in Snap! and Python; earned a 4.75/5 teacher rating.</li>
+      <li>Taught labs and discussions, contributed to course development, proctored and graded exams, held weekly office hours, and mentored academic interns.</li>
+    </ul>
+  </div>
+
+  <h2>Projects</h2>
+  <p class="project"><span class="name">Prompt Yourself</span><span class="url"><span class="sep">|</span><a href="https://aburke225.github.io/prompt-yourself/">aburke225.github.io/prompt-yourself</a></span><span class="sep">|</span>free AI tutor and interview-coach bots, plus guides to writing your own; hands-free spoken sessions, whiteboard, and resume upload for the interview bot; a Cloudflare Worker relay manages the API keys and falls back across three free AI providers when one hits its limit; a daily check to replace deprecated models and re-rank the live ones against a fixed behavior suite.</p>
+  <p class="project"><span class="name">Burke Bot</span><span class="url"><span class="sep">|</span><a href="https://aburke225.github.io/burke-bot/">aburke225.github.io/burke-bot</a></span><span class="sep">|</span>a chess bot that plays like me; the opening book samples my real chess.com games at my exact frequencies, then a conditional logit model trained via behavior cloning chooses among Stockfish's top 20 candidate moves; games I play against the bot are captured for it to be retrained by a daily GitHub Action.</p>
+  <p class="project"><span class="name">Stay-Fresh</span><span class="url"><span class="sep">|</span><a href="https://github.com/Aburke225/Stay-Fresh">github.com/Aburke225/Stay-Fresh</a></span><span class="sep">|</span>iOS app that tracks food expiration to reduce food waste; users log the foods in their fridge and freezer; built in Swift with Xcode.</p>
+
+  <h2>Education</h2>
+  <div class="company-line"><span>University of California, Berkeley<span class="sep">|</span>B.A., Cognitive Science</span><span class="dates">2017–2021</span></div>
+
+  <h2>Skills</h2>
+  <p class="skills-row"><span class="label">Languages:</span> Python, Java, Swift, Kotlin, C, Go, SQL, GraphQL, JavaScript, HTML/CSS</p>
+  <p class="skills-row"><span class="label">Content &amp; Markup:</span> ERB, Markdown, YAML</p>
+  <p class="skills-row"><span class="label">Tools &amp; Platforms:</span> Git/GitHub/GitHub Actions, NumPy, Machine Learning, AI autograder, Cloudflare Workers</p>
+
+  <h2>Volunteer Teaching</h2>
+  <div class="volunteer">
+    <p><strong><a href="https://www.smash.org">SMASH Academy</a></strong> (2022)<span class="sep">|</span>introduction to neural networks for incoming 12th graders; taught in Google Colab.</p>
+    <p><strong>Eastbay Collaborative for Underserved Children</strong> (2020)<span class="sep">|</span>4th-grade lessons, projects, and concept review.</p>
+  </div>
+
+</body>
+</html>
