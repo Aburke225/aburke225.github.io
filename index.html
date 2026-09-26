@@ -553,14 +553,11 @@
     }
     /* Loupe card wears that site's colorway: warm paper, a warm border and
        the green 11B wordmark. The Loupe site is light only, so the tile is
-       paper on both themes. Not live yet: no link, so the card is not
-       clickable or focusable, and it carries a "Coming soon" pill in its
-       own colours (the page's muted grey is too faint on paper; #6b6255 on
-       the paper is 5.4:1) */
+       paper on both themes. The wordmark is the stretched title link, like
+       the other cards */
     .project.lp {
       background: #f6f2ea;
       border-color: #e3dccd;
-      cursor: default;
       transition: border-color 0.15s ease;
       text-align: center;
       padding: 1.5rem 1.2rem;
@@ -570,26 +567,16 @@
       justify-content: center;
     }
     /* on the light page the paper is close to the page itself, so the edge
-       takes the pill's warmer tan (1.44:1, like Stay-Fresh's). Same specificity
+       takes a warmer tan (1.44:1, like Stay-Fresh's). Same specificity
        as the hover rule below, which comes later and so still wins */
     [data-theme="light"] .project.lp { border-color: #d9cfbd; }
-    /* a fixed title box, so the pill and card hold still when the Nunito
-       subset swaps in for the fallback */
+    /* a fixed title box, so the card holds still when the Nunito subset
+       swaps in for the fallback */
     .project.lp h3 {
       margin: 0;
       font-size: 1.6rem;
       line-height: 1;
       height: 1.1em;
-    }
-    /* the pill sits snug under the word (line-height 1.25, a 0.45rem gap), so
-       the pair reads as one lockup and the word sits within 3px of Stay-Fresh's
-       title beside it; the gap still leaves the logo's clear space of half an o */
-    .project.lp .soon {
-      font-size: 0.7rem;
-      line-height: 1.25;
-      margin-top: 0.45rem;
-      color: #6b6255;
-      border-color: #d9cfbd;
     }
     /* Loupe hover, "Look closer.": the o is lifted toward you, leaning in
        over "upe" with a soft shadow on the paper beneath it, and the sun
@@ -697,8 +684,7 @@
         <svg class="sf-dots" viewBox="0 0 64 10" aria-hidden="true"><circle cx="8" cy="5" r="4" fill="#34d399"/><circle cx="32" cy="5" r="4" fill="#a3e635"/><circle cx="56" cy="5" r="4" fill="#fbbf24"/></svg>
       </li>
       <li class="project lp">
-        <h3><span class="loupe-wm" role="img" aria-label="Loupe" style="font: 900 1em/1 Nunito, sans-serif; letter-spacing: -.03em; color: #1A7049; white-space: nowrap">L<svg viewBox="0 -800 574.4 1050" style="display:inline-block;width:0.5744em;height:1.05em;vertical-align:-.25em;margin:0 0.025em 0 0.065em;overflow:visible" aria-hidden="true"><g transform="matrix(0.8565 -0.0791 0 0.9553 81.97 23.58)"><path class="c11b-wall" fill="#414E48" fill-rule="evenodd" d="M-47.88 -478.82L149.62 -583.58A90 90 0 0 1 223.44 -588.32L313.53 -554.49A90 90 0 0 1 324.06 -549.74L521.56 -444.98A90 90 0 0 1 569.38 -365.47L569.38 -168.75A90 90 0 0 1 521.56 -89.24L324.06 15.52A90 90 0 0 1 250.24 20.27L160.15 -13.57A90 90 0 0 1 149.62 -18.32L-47.88 -123.08A90 90 0 0 1 -95.71 -202.58L-95.71 -399.31A90 90 0 0 1 -47.88 -478.82ZM108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-glass" fill="#E3F1E7" d="M108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-bore" fill="#414E48" fill-rule="evenodd" d="M129.5 -265a158 158 0 1 0 316 0a158 158 0 1 0 -316 0ZM108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-body" fill="#1C2621" fill-rule="evenodd" d="M329.67 -547.63L527.17 -442.87A90 90 0 0 1 575 -363.36L575 -166.64A90 90 0 0 1 527.17 -87.13L329.67 17.63A90 90 0 0 1 245.33 17.63L47.83 -87.13A90 90 0 0 1 0 -166.64L0 -363.36A90 90 0 0 1 47.83 -442.87L245.33 -547.63A90 90 0 0 1 329.67 -547.63ZM137.5 -265a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-glint" fill="none" stroke="#F2B33D" stroke-width="72" stroke-linecap="round" d="M210.68 -278.54A78 78 0 0 1 273.96 -341.82"/></g></svg>upe</span></h3>
-        <span class="soon">Coming soon</span>
+        <h3><a href="https://loupe.andrewburke225.workers.dev/"><span class="loupe-wm" role="img" aria-label="Loupe" style="font: 900 1em/1 Nunito, sans-serif; letter-spacing: -.03em; color: #1A7049; white-space: nowrap">L<svg viewBox="0 -800 574.4 1050" style="display:inline-block;width:0.5744em;height:1.05em;vertical-align:-.25em;margin:0 0.025em 0 0.065em;overflow:visible" aria-hidden="true"><g transform="matrix(0.8565 -0.0791 0 0.9553 81.97 23.58)"><path class="c11b-wall" fill="#414E48" fill-rule="evenodd" d="M-47.88 -478.82L149.62 -583.58A90 90 0 0 1 223.44 -588.32L313.53 -554.49A90 90 0 0 1 324.06 -549.74L521.56 -444.98A90 90 0 0 1 569.38 -365.47L569.38 -168.75A90 90 0 0 1 521.56 -89.24L324.06 15.52A90 90 0 0 1 250.24 20.27L160.15 -13.57A90 90 0 0 1 149.62 -18.32L-47.88 -123.08A90 90 0 0 1 -95.71 -202.58L-95.71 -399.31A90 90 0 0 1 -47.88 -478.82ZM108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-glass" fill="#E3F1E7" d="M108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-bore" fill="#414E48" fill-rule="evenodd" d="M129.5 -265a158 158 0 1 0 316 0a158 158 0 1 0 -316 0ZM108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-body" fill="#1C2621" fill-rule="evenodd" d="M329.67 -547.63L527.17 -442.87A90 90 0 0 1 575 -363.36L575 -166.64A90 90 0 0 1 527.17 -87.13L329.67 17.63A90 90 0 0 1 245.33 17.63L47.83 -87.13A90 90 0 0 1 0 -166.64L0 -363.36A90 90 0 0 1 47.83 -442.87L245.33 -547.63A90 90 0 0 1 329.67 -547.63ZM137.5 -265a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-glint" fill="none" stroke="#F2B33D" stroke-width="72" stroke-linecap="round" d="M210.68 -278.54A78 78 0 0 1 273.96 -341.82"/></g></svg>upe</span></a></h3>
       </li>
       <li class="project dv">
         <h3><a href="https://aburke225.github.io/deja-vu/">Déjà Vu Log</a></h3>
