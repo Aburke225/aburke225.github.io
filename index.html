@@ -213,7 +213,7 @@
     }
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
       grid-auto-rows: 1fr; /* all cards match the tallest, across rows */
       gap: 0.9rem;
       padding: 0;
