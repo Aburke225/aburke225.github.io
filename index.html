@@ -580,39 +580,154 @@
       line-height: 1;
       height: 1.1em;
     }
-    /* Loupe hover, "Look closer.": the o is lifted toward you, leaning in
-       over "upe" with a soft shadow on the paper beneath it, and the sun
-       glint slides round the rim as the glass tilts to the light; then it
-       settles back into the word. 4s loop that starts and ends at rest.
-       The shadow keeps the lift off the compositor and the glint's turn
-       repaints the o each frame; both kept on purpose, run only while hovered
-       or in view */
+    /* Loupe hover, "the inspection", as a real magnifier: the glint goes;
+       the o is lifted toward you, growing as it slides along the line to the
+       L; it stops, goes back to the u, stops, then across the p
+       without stopping to the e, stops; then it heads home, shrinking as it
+       goes, so it lands at its own size; 0.2s later the glint draws itself
+       back on. The letter under the glass shows enlarged inside the lens the
+       whole time. 6.685s loop that starts and ends at rest; runs only while
+       hovered or in view.
+       Everything that moves is an HTML box moved by transform only (the
+       browser's fast path draws an animated transform on an <svg> itself,
+       and an animated clip-path, in the wrong place): .lp-o wraps the o and
+       lifts and slides; .lp-lens is an oval window the size of the lifted
+       glass (overflow hidden) that slides and scales with it; inside it
+       .lp-mag is a copy of the word laid out like the real one.
+       The keyframes are generated (scratchpad lp-preview/keyframes.py). In em
+       of the wordmark: glass centre x 0.9233 (home), y 0.663; lens radii
+       0.2655 x 0.3208 at full lift; stops (glass over) L 0.20, u 1.5043,
+       e 2.6423; lift S up to 2.2 round the glass centre (52.86% 51.4% of the
+       o's box); magnification M up to 1.5. With s = S / 2.2 and m = M / s,
+       the copy moves by 0.9233 - m x (0.9233 + slide) and 0.5867 x (1 - m)
+       and scales by m. The growing lift-out and the shrinking return are sampled
+       in ten steps because those relations aren't linear; the slides are single
+       ease-in-out segments (exact there) */
+    .project.lp .loupe-wm { position: relative; }
+    .project.lp .lp-ch { display: inline-block; }
+    .project.lp .lp-o {
+      display: inline-block; vertical-align: -0.25em; margin: 0 0.025em 0 0.065em;
+      position: relative; z-index: 1; transform-origin: 52.86% 51.4%; /* the glass centre */
+    }
+    .project.lp .lp-lens {
+      position: absolute; left: 0.6578em; top: 0.3422em; width: 0.531em; height: 0.6416em;
+      border-radius: 50%; overflow: hidden; z-index: 2; opacity: 0;
+      pointer-events: none; user-select: none;
+    }
+    .project.lp .lp-mag {
+      position: absolute; left: -0.6578em; top: -0.2659em;
+      white-space: nowrap; transform-origin: 0 0;
+    }
+    .project.lp .lp-gap {
+      display: inline-block; width: 0.5744em; height: 1.05em;
+      vertical-align: -0.25em; margin: 0 0.025em 0 0.065em;
+    }
+    .project.lp .c11b-glint { stroke-dasharray: 96.5 200; }
     .project.lp:hover,
     .project.lp.in-view { border-color: #1a7049; }
-    .project.lp:hover .loupe-wm svg,
-    .project.lp.in-view .loupe-wm svg {
-      animation: lplift 4s ease-in-out infinite;
-      transform-origin: 50% 49%; /* the hexagon's centre */
-    }
+    .project.lp:hover .lp-o, .project.lp.in-view .lp-o { animation: lplift 6.685s linear infinite; }
+    .project.lp:hover .lp-lens, .project.lp.in-view .lp-lens { animation: lplens 6.685s linear infinite; }
+    .project.lp:hover .lp-mag, .project.lp.in-view .lp-mag { animation: lpmag 6.685s linear infinite; }
     .project.lp:hover .c11b-glint,
-    .project.lp.in-view .c11b-glint {
-      animation: lpglint 4s ease-in-out infinite;
-      transform-box: fill-box;
-      transform-origin: 121.4% 121.4%; /* the lens centre, from the arc's box */
-    }
+    .project.lp.in-view .c11b-glint { animation: lpglint 6.685s linear infinite; }
     @keyframes lplift {
-      0%, 8%, 84%, 100% { transform: none; filter: drop-shadow(0 0 0 rgba(28, 38, 33, 0)); }
-      30%, 62% { transform: translate(-0.02em, -0.12em) rotate(5deg) scale(1.08); filter: drop-shadow(0.04em 0.14em 0.08em rgba(28, 38, 33, 0.3)); }
+      0.00% { transform: translateX(0em) scale(1); filter: drop-shadow(0em 0em 0em rgba(28, 38, 33, 0)); }
+      1.94% { transform: translateX(-0.0029em) scale(1.0048); filter: drop-shadow(0.0001em 0.0004em 0.0003em rgba(28, 38, 33, 0.0011)); }
+      3.89% { transform: translateX(-0.0231em) scale(1.0384); filter: drop-shadow(0.001em 0.0029em 0.0022em rgba(28, 38, 33, 0.009)); }
+      5.83% { transform: translateX(-0.0781em) scale(1.1296); filter: drop-shadow(0.0032em 0.0097em 0.0076em rgba(28, 38, 33, 0.0302)); }
+      7.78% { transform: translateX(-0.1852em) scale(1.3072); filter: drop-shadow(0.0077em 0.023em 0.0179em rgba(28, 38, 33, 0.0717)); }
+      9.72% { transform: translateX(-0.3617em) scale(1.6); filter: drop-shadow(0.015em 0.045em 0.035em rgba(28, 38, 33, 0.14)); }
+      11.67% { transform: translateX(-0.5381em) scale(1.8928); filter: drop-shadow(0.0223em 0.067em 0.0521em rgba(28, 38, 33, 0.2083)); }
+      13.61% { transform: translateX(-0.6452em) scale(2.0704); filter: drop-shadow(0.0268em 0.0803em 0.0624em rgba(28, 38, 33, 0.2498)); }
+      15.56% { transform: translateX(-0.7002em) scale(2.1616); filter: drop-shadow(0.029em 0.0871em 0.0678em rgba(28, 38, 33, 0.271)); }
+      17.50% { transform: translateX(-0.7204em) scale(2.1952); filter: drop-shadow(0.0299em 0.0896em 0.0697em rgba(28, 38, 33, 0.2789)); }
+      19.45% { transform: translateX(-0.7233em) scale(2.2); filter: drop-shadow(0.03em 0.09em 0.07em rgba(28, 38, 33, 0.28)); }
+      22.44% { transform: translateX(-0.7233em) scale(2.2); filter: drop-shadow(0.03em 0.09em 0.07em rgba(28, 38, 33, 0.28)); animation-timing-function: ease-in-out; }
+      34.41% { transform: translateX(0.581em) scale(2.2); filter: drop-shadow(0.03em 0.09em 0.07em rgba(28, 38, 33, 0.28)); }
+      39.19% { transform: translateX(0.581em) scale(2.2); filter: drop-shadow(0.03em 0.09em 0.07em rgba(28, 38, 33, 0.28)); animation-timing-function: ease-in-out; }
+      51.16% { transform: translateX(1.719em) scale(2.2); filter: drop-shadow(0.03em 0.09em 0.07em rgba(28, 38, 33, 0.28)); }
+      55.12% { transform: translateX(1.719em) scale(2.2); filter: drop-shadow(0.03em 0.09em 0.07em rgba(28, 38, 33, 0.28)); }
+      57.07% { transform: translateX(1.7121em) scale(2.1952); filter: drop-shadow(0.0299em 0.0896em 0.0697em rgba(28, 38, 33, 0.2789)); }
+      59.01% { transform: translateX(1.664em) scale(2.1616); filter: drop-shadow(0.029em 0.0871em 0.0678em rgba(28, 38, 33, 0.271)); }
+      60.96% { transform: translateX(1.5333em) scale(2.0704); filter: drop-shadow(0.0268em 0.0803em 0.0624em rgba(28, 38, 33, 0.2498)); }
+      62.90% { transform: translateX(1.2789em) scale(1.8928); filter: drop-shadow(0.0223em 0.067em 0.0521em rgba(28, 38, 33, 0.2083)); }
+      64.85% { transform: translateX(0.8595em) scale(1.6); filter: drop-shadow(0.015em 0.045em 0.035em rgba(28, 38, 33, 0.14)); }
+      66.79% { transform: translateX(0.4401em) scale(1.3072); filter: drop-shadow(0.0077em 0.023em 0.0179em rgba(28, 38, 33, 0.0717)); }
+      68.74% { transform: translateX(0.1857em) scale(1.1296); filter: drop-shadow(0.0032em 0.0097em 0.0076em rgba(28, 38, 33, 0.0302)); }
+      70.68% { transform: translateX(0.055em) scale(1.0384); filter: drop-shadow(0.001em 0.0029em 0.0022em rgba(28, 38, 33, 0.009)); }
+      72.63% { transform: translateX(0.0069em) scale(1.0048); filter: drop-shadow(0.0001em 0.0004em 0.0003em rgba(28, 38, 33, 0.0011)); }
+      74.57% { transform: translateX(0em) scale(1); filter: drop-shadow(0em 0em 0em rgba(28, 38, 33, 0)); }
+      100.00% { transform: translateX(0em) scale(1); filter: drop-shadow(0em 0em 0em rgba(28, 38, 33, 0)); }
+    }
+    @keyframes lplens {
+      0.00% { transform: translateX(0em) scale(0.4545); opacity: 1; }
+      1.94% { transform: translateX(-0.0029em) scale(0.4567); opacity: 1; }
+      3.89% { transform: translateX(-0.0231em) scale(0.472); opacity: 1; }
+      5.83% { transform: translateX(-0.0781em) scale(0.5135); opacity: 1; }
+      7.78% { transform: translateX(-0.1852em) scale(0.5942); opacity: 1; }
+      9.72% { transform: translateX(-0.3617em) scale(0.7273); opacity: 1; }
+      11.67% { transform: translateX(-0.5381em) scale(0.8604); opacity: 1; }
+      13.61% { transform: translateX(-0.6452em) scale(0.9411); opacity: 1; }
+      15.56% { transform: translateX(-0.7002em) scale(0.9825); opacity: 1; }
+      17.50% { transform: translateX(-0.7204em) scale(0.9978); opacity: 1; }
+      19.45% { transform: translateX(-0.7233em) scale(1); opacity: 1; }
+      22.44% { transform: translateX(-0.7233em) scale(1); opacity: 1; animation-timing-function: ease-in-out; }
+      34.41% { transform: translateX(0.581em) scale(1); opacity: 1; }
+      39.19% { transform: translateX(0.581em) scale(1); opacity: 1; animation-timing-function: ease-in-out; }
+      51.16% { transform: translateX(1.719em) scale(1); opacity: 1; }
+      55.12% { transform: translateX(1.719em) scale(1); opacity: 1; }
+      57.07% { transform: translateX(1.7121em) scale(0.9978); opacity: 1; }
+      59.01% { transform: translateX(1.664em) scale(0.9825); opacity: 1; }
+      60.96% { transform: translateX(1.5333em) scale(0.9411); opacity: 1; }
+      62.90% { transform: translateX(1.2789em) scale(0.8604); opacity: 1; }
+      64.85% { transform: translateX(0.8595em) scale(0.7273); opacity: 1; }
+      66.79% { transform: translateX(0.4401em) scale(0.5942); opacity: 1; }
+      68.74% { transform: translateX(0.1857em) scale(0.5135); opacity: 1; }
+      70.68% { transform: translateX(0.055em) scale(0.472); opacity: 1; }
+      72.63% { transform: translateX(0.0069em) scale(0.4567); opacity: 1; }
+      74.57% { transform: translateX(0em) scale(0.4545); opacity: 1; }
+      74.72% { transform: translateX(0em) scale(0.4545); opacity: 0; }
+      100.00% { transform: translateX(0em) scale(0.4545); opacity: 0; }
+    }
+    @keyframes lpmag {
+      0.00% { transform: translate(-1.108em, -0.704em) scale(2.2); }
+      1.94% { transform: translate(-1.096em, -0.7004em) scale(2.1939); }
+      3.89% { transform: translate(-1.0143em, -0.6762em) scale(2.1525); }
+      5.83% { transform: translate(-0.8117em, -0.6177em) scale(2.0528); }
+      7.78% { transform: translate(-0.478em, -0.5271em) scale(1.8984); }
+      9.72% { transform: translate(-0.042em, -0.4217em) scale(1.7188); }
+      11.67% { transform: translate(0.3091em, -0.3489em) scale(1.5947); }
+      13.61% { transform: translate(0.496em, -0.3148em) scale(1.5365); }
+      15.56% { transform: translate(0.5863em, -0.2994em) scale(1.5104); }
+      17.50% { transform: translate(0.6187em, -0.2941em) scale(1.5013); }
+      19.45% { transform: translate(0.6233em, -0.2933em) scale(1.5); }
+      22.44% { transform: translate(0.6233em, -0.2933em) scale(1.5); animation-timing-function: ease-in-out; }
+      34.41% { transform: translate(-1.3332em, -0.2933em) scale(1.5); }
+      39.19% { transform: translate(-1.3332em, -0.2933em) scale(1.5); animation-timing-function: ease-in-out; }
+      51.16% { transform: translate(-3.0401em, -0.2933em) scale(1.5); }
+      55.12% { transform: translate(-3.0401em, -0.2933em) scale(1.5); }
+      57.07% { transform: translate(-3.0332em, -0.2941em) scale(1.5013); }
+      59.01% { transform: translate(-2.9844em, -0.2994em) scale(1.5104); }
+      60.96% { transform: translate(-2.8514em, -0.3148em) scale(1.5365); }
+      62.90% { transform: translate(-2.5885em, -0.3489em) scale(1.5947); }
+      64.85% { transform: translate(-2.1409em, -0.4217em) scale(1.7188); }
+      66.79% { transform: translate(-1.6649em, -0.5271em) scale(1.8984); }
+      68.74% { transform: translate(-1.3531em, -0.6177em) scale(2.0528); }
+      70.68% { transform: translate(-1.1825em, -0.6762em) scale(2.1525); }
+      72.63% { transform: translate(-1.1174em, -0.7004em) scale(2.1939); }
+      74.57% { transform: translate(-1.108em, -0.704em) scale(2.2); }
+      100.00% { transform: translate(-1.108em, -0.704em) scale(2.2); }
     }
     @keyframes lpglint {
-      0%, 8%, 84%, 100% { transform: none; }
-      36%, 58% { transform: rotate(32deg); }
+      0%, 77.56% { opacity: 0; stroke-dashoffset: 97.5; }
+      77.71% { opacity: 1; stroke-dashoffset: 97.5; animation-timing-function: ease-in-out; }
+      89.53%, 100% { opacity: 1; stroke-dashoffset: 0; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .project.lp:hover .loupe-wm svg,
-      .project.lp.in-view .loupe-wm svg,
-      .project.lp:hover .c11b-glint,
-      .project.lp.in-view .c11b-glint { animation: none; }
+      .project.lp:hover .lp-o, .project.lp.in-view .lp-o,
+      .project.lp:hover .lp-lens, .project.lp.in-view .lp-lens,
+      .project.lp:hover .lp-mag, .project.lp.in-view .lp-mag,
+      .project.lp:hover .c11b-glint, .project.lp.in-view .c11b-glint { animation: none; }
     }
     /* forced colours (e.g. Windows High Contrast): the letters follow the
        system text colour, so the o follows too, as a solid hexagon with a
@@ -686,7 +801,7 @@
         <svg class="sf-dots" viewBox="0 0 64 10" aria-hidden="true"><circle cx="8" cy="5" r="4" fill="#34d399"/><circle cx="32" cy="5" r="4" fill="#a3e635"/><circle cx="56" cy="5" r="4" fill="#fbbf24"/></svg>
       </li>
       <li class="project lp">
-        <h3><a href="https://loupe.andrewburke225.workers.dev/"><span class="loupe-wm" role="img" aria-label="Loupe" style="font: 900 1em/1 Nunito, sans-serif; letter-spacing: -.03em; color: #1A7049; white-space: nowrap">L<svg viewBox="0 -800 574.4 1050" style="display:inline-block;width:0.5744em;height:1.05em;vertical-align:-.25em;margin:0 0.025em 0 0.065em;overflow:visible" aria-hidden="true"><g transform="matrix(0.8565 -0.0791 0 0.9553 81.97 23.58)"><path class="c11b-wall" fill="#414E48" fill-rule="evenodd" d="M-47.88 -478.82L149.62 -583.58A90 90 0 0 1 223.44 -588.32L313.53 -554.49A90 90 0 0 1 324.06 -549.74L521.56 -444.98A90 90 0 0 1 569.38 -365.47L569.38 -168.75A90 90 0 0 1 521.56 -89.24L324.06 15.52A90 90 0 0 1 250.24 20.27L160.15 -13.57A90 90 0 0 1 149.62 -18.32L-47.88 -123.08A90 90 0 0 1 -95.71 -202.58L-95.71 -399.31A90 90 0 0 1 -47.88 -478.82ZM108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-glass" fill="#E3F1E7" d="M108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-bore" fill="#414E48" fill-rule="evenodd" d="M129.5 -265a158 158 0 1 0 316 0a158 158 0 1 0 -316 0ZM108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-body" fill="#1C2621" fill-rule="evenodd" d="M329.67 -547.63L527.17 -442.87A90 90 0 0 1 575 -363.36L575 -166.64A90 90 0 0 1 527.17 -87.13L329.67 17.63A90 90 0 0 1 245.33 17.63L47.83 -87.13A90 90 0 0 1 0 -166.64L0 -363.36A90 90 0 0 1 47.83 -442.87L245.33 -547.63A90 90 0 0 1 329.67 -547.63ZM137.5 -265a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-glint" fill="none" stroke="#F2B33D" stroke-width="72" stroke-linecap="round" d="M210.68 -278.54A78 78 0 0 1 273.96 -341.82"/></g></svg>upe</span></a></h3>
+        <h3><a href="https://loupe.andrewburke225.workers.dev/"><span class="loupe-wm" role="img" aria-label="Loupe" style="font: 900 1em/1 Nunito, sans-serif; letter-spacing: -.03em; color: #1A7049; white-space: nowrap"><span class="lp-ch lp-l">L</span><span class="lp-o"><svg viewBox="0 -800 574.4 1050" style="display:block;width:0.5744em;height:1.05em;overflow:visible" aria-hidden="true"><g transform="matrix(0.8565 -0.0791 0 0.9553 81.97 23.58)"><path class="c11b-wall" fill="#414E48" fill-rule="evenodd" d="M-47.88 -478.82L149.62 -583.58A90 90 0 0 1 223.44 -588.32L313.53 -554.49A90 90 0 0 1 324.06 -549.74L521.56 -444.98A90 90 0 0 1 569.38 -365.47L569.38 -168.75A90 90 0 0 1 521.56 -89.24L324.06 15.52A90 90 0 0 1 250.24 20.27L160.15 -13.57A90 90 0 0 1 149.62 -18.32L-47.88 -123.08A90 90 0 0 1 -95.71 -202.58L-95.71 -399.31A90 90 0 0 1 -47.88 -478.82ZM108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-glass" fill="#E3F1E7" d="M108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-bore" fill="#414E48" fill-rule="evenodd" d="M129.5 -265a158 158 0 1 0 316 0a158 158 0 1 0 -316 0ZM108.79 -275.77a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-body" fill="#1C2621" fill-rule="evenodd" d="M329.67 -547.63L527.17 -442.87A90 90 0 0 1 575 -363.36L575 -166.64A90 90 0 0 1 527.17 -87.13L329.67 17.63A90 90 0 0 1 245.33 17.63L47.83 -87.13A90 90 0 0 1 0 -166.64L0 -363.36A90 90 0 0 1 47.83 -442.87L245.33 -547.63A90 90 0 0 1 329.67 -547.63ZM137.5 -265a150 150 0 1 0 300 0a150 150 0 1 0 -300 0Z"/><path class="c11b-glint" fill="none" stroke="#F2B33D" stroke-width="72" stroke-linecap="round" d="M210.68 -278.54A78 78 0 0 1 273.96 -341.82"/></g></svg></span><span class="lp-ch lp-u">u</span><span class="lp-ch lp-p">p</span><span class="lp-ch lp-e">e</span><span class="lp-lens" aria-hidden="true"><span class="lp-mag"><span class="lp-ch">L</span><span class="lp-gap"></span><span class="lp-ch">u</span><span class="lp-ch">p</span><span class="lp-ch">e</span></span></span></span></a></h3>
       </li>
       <li class="project dv">
         <h3><a href="https://aburke225.github.io/deja-vu/">Déjà Vu Log</a></h3>
