@@ -235,17 +235,23 @@
       position: absolute;
       inset: 0;
     }
+    /* hover outlines: every card's edge takes its own colour. Prompt Yourself's
+       bright teal reads strongly at 1px, and so do Deja Vu's violet and
+       Stay-Fresh's blue; Majoris, Loupe and Burke Bot's colours sit close to
+       their card or the page, so those three add a matching half-pixel ring
+       outside the border (box-shadow), which reads as strongly (a full extra
+       pixel read heavier than the teal) */
     .project.py:hover,
     .project.py.in-view { border-color: #35c4a4; }
     .project.dv:hover,
     .project.dv.in-view { border-color: #8b7de8; }
-    /* Stay-Fresh hover: the card lifts, the border goes blue, and the
+    /* Stay-Fresh hover: the border goes blue and the
        freshness colors travel through the dots, left to right — food
        staying fresh. Each dot steps green, amber, lime, so the pattern
        moves right one dot per third of the loop and starts from the dots'
        resting colors (green, lime, amber) with no jump */
     .project.sf:hover,
-    .project.sf.in-view { transform: translateY(-2px); border-color: #3b82f6; }
+    .project.sf.in-view { border-color: #3b82f6; }
     .project.sf:hover .sf-dots circle,
     .project.sf.in-view .sf-dots circle { animation: sfcycle 1.8s linear infinite; }
     .project.sf:hover .sf-dots circle:nth-of-type(2),
@@ -258,8 +264,6 @@
       66% { fill: #a3e635; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .project.sf:hover,
-      .project.sf.in-view { transform: none; }
       .project.sf:hover .sf-dots circle,
       .project.sf.in-view .sf-dots circle { animation: none; }
     }
@@ -353,7 +357,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: border-color 0.15s ease;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
       overflow: hidden;
       isolation: isolate; /* lets the hopping pieces sit above the tiles but under the wordmark */
     }
@@ -373,7 +377,7 @@
        pattern tile), corners at 50% ± n*36px; the action is centered, knights
        framing the wordmark's corners, pawns meeting beneath it. */
     .project.bb:hover,
-    .project.bb.in-view { border-color: #7cb56e; }
+    .project.bb.in-view { border-color: #7cb56e; box-shadow: 0 0 0 0.5px #7cb56e; }
     .bb-piece {
       position: absolute;
       width: 36px;
@@ -562,7 +566,7 @@
        stretched title link, like the other cards, and keeps its starlight on hover */
     .project.mj { background: #0E1428; border-color: #283253; text-align: center; padding: 1.5rem 1.2rem;
       display: flex; align-items: center; justify-content: center; overflow: hidden; isolation: isolate;
-      transition: border-color 0.15s ease; }
+      transition: border-color 0.15s ease, box-shadow 0.15s ease; }
     /* the star field: behind the title (isolation keeps it above the card fill) */
     .project.mj .csky { position: absolute; inset: 0; z-index: -1; pointer-events: none; container-type: size; }
     /* the still sky: the whole 800 x 112 field, a centred crop at the card's height */
@@ -610,7 +614,7 @@
     [data-theme="light"] .project.mj { border-color: #0E1428; }
     /* same specificity as the light-theme edge above, and later, so it wins there too */
     .project.mj:hover,
-    .project.mj.in-view { border-color: #6F82AD; }
+    .project.mj.in-view { border-color: #6F82AD; box-shadow: 0 0 0 0.5px #6F82AD; }
     .project.mj h3 { margin: 0; font-size: 1.6rem; line-height: 1; display: flex; justify-content: center; color: #F2EEE3; }
     /* the link is a flex box too, so wrapping the lockup in it adds no line box
        and the lockup sits exactly where it did; the base title hover turns
@@ -632,7 +636,7 @@
     .project.lp {
       background: #f6f2ea;
       border-color: #e3dccd;
-      transition: border-color 0.15s ease;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
       text-align: center;
       padding: 1.5rem 1.2rem;
       display: flex;
@@ -706,7 +710,7 @@
     }
     .project.lp .c11b-glint { stroke-dasharray: 96.5 200; }
     .project.lp:hover,
-    .project.lp.in-view { border-color: #1a7049; }
+    .project.lp.in-view { border-color: #1a7049; box-shadow: 0 0 0 0.5px #1a7049; }
     .project.lp:hover .lp-o, .project.lp.in-view .lp-o { animation: lplift 6.685s linear infinite; }
     .project.lp:hover .lp-lens, .project.lp.in-view .lp-lens { animation: lplens 6.685s linear infinite; }
     .project.lp:hover .lp-mag, .project.lp.in-view .lp-mag { animation: lpmag 6.685s linear infinite; }
